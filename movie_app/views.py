@@ -9,10 +9,8 @@ def home(request):
 
 
 def first(request):
-    render(request, 'first.html')
-    user = request.POST
-    print(list(user)[1])
-    if (list(user)[1] == 'admin'):
-        return render(request, 'login.html')
-    else:
-        return render(request, 'home.html')
+    return render(request, 'first.html')
+
+
+def login(request):
+    return render(request, 'login.html')
