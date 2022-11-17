@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    <title>Login</title>
+    <title>Select</title>
 {% endblock title %}
 
 {% block content %}
@@ -9,8 +9,9 @@
         <h2>Login</h2>
         <form method="POST" class="mt-3 col-6">
             {% csrf_token %}
-            <input type="number" name ="name">Enter name<br>
-            <input type="password" name="pwd">Enter password</br>
+            <a href="{% url 'login' %}"><button class="btn btn-primary mb-5" type="submit" value='admin' name='admin'>Admin</button></a></br>
+            <a href="{% url 'home' %}"><button class="btn btn-primary mb-5" type="submit"  value='user' name='user'>User</a></button>
         </form>
     </div>
 {% endblock content %}
+
