@@ -1,0 +1,21 @@
+.image {
+
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-attachment: fixed;
+    opacity: 1;
+
+}
+
+
+.heading {
+    margin-top: 30vh;
+}
+
+
+
+
+h2 {
+    text-align: center;
+}

@@ -11,7 +11,12 @@ def index(request):
     if request.method == "POST":
         try:
             genres = request.POST.get('genre')
-            movies = Movies.objects.all().filter(genre=genres)
+            cursor = connections['default'].cursor()
+            movies = []
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    "SELECT * FROM movie_app_movies where genre= %s", [genres])
+                movies = cursor.fetchall()
             return render(request, 'index.html', {'movies': movies})
         except:
             movie = None
@@ -38,28 +43,21 @@ def login(request):
         return render(request, 'login.html')
 
 
-# def insert_movies(request):
-#     cursor = connections['default'].cursor()
-#     cursor.execute("INSERT INTO movie_app_movies(movieid,name,language,genre,director,actor) VALUES( %d, %s, %s, %s, %s, %s )", [name,])
-#     with connection.cursor() as cursor:
-#         cursor.execute("select * from movie_app_movies")
-#         movies = cursor.fetchone()
-#         print(movies.name)
-#         return render(request, 'insert_movies.html', {movies: {}})
-
-
 def insert_movies(request):
     if request.method == "POST":
-        # form = MovieForm(request.POST or None)
-        # if form.is_valid():
-        #     form.save()
-        movie = Movies(name=request.POST.get("name"), movieid=request.POST.get("id"), director=request.POST.get(
-            "director"), actor=request.POST.get("actor"), genre=request.POST.get("genre"), language=request.POST.get("lang"))
-        movie.save()
-        movies = Movies.objects.all()
-
-        return render(request, 'insert_movies.html', {'movies': movies})
-
+        name = request.POST.get("name")
+        movieid = request.POST.get("id")
+        director = request.POST.get("director")
+        actor = request.POST.get("actor")
+        genre = request.POST.get("genre")
+        language = request.POST.get("lang")
+        cursor = connections['default'].cursor()
+        cursor.execute("INSERT INTO movie_app_movies(movieid,name,language,genre,director,actor) VALUES( %s, %s, %s, %s, %s, %s )", [
+                       movieid, name, language, genre, director, actor])
+        with connection.cursor() as cursor:
+            cursor.execute("select * from movie_app_movies")
+            movies = cursor.fetchall()
+            return render(request, 'insert_movies.html', {'movies': movies})
     else:
         movies = Movies.objects.all()
         return render(request, 'insert_movies.html', {'movies': movies})

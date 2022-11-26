@@ -1,19 +1,19 @@
 
-
-
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
     <title>Login</title>
 {% endblock title %}
 
 {% block content %}
-    <div class="container">
+    <div class="container text-center">
     </br>
-        <h2>Login</h2>
-        <form method="POST" class="mt-3 col-6">
+        <h2><div>Login</div></h2><br>
+        <form method="POST">
             {% csrf_token %}
-            <input type="number" name ="name">Enter name<br>
-            <input type="password" name="pwd">Enter password</br>
+            <input type="text" name ="name" placeholder="Enter Name"><br><br>
+            <input type="password" name="pass" placeholder="Enter password"></br><br>
+            <button class="btn btn-secondary" type="submit">Submit</button>
         </form>
     </div>
 {% endblock content %}

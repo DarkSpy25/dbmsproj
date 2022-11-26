@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Movies(models.Model):
-    movieid = models.AutoField(primary_key=True, default=1)
+    movieid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=300)
     language = models.CharField(max_length=300)
     genre = models.CharField(max_length=100)
@@ -12,22 +12,22 @@ class Movies(models.Model):
     actor = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.movieid
+        return self.name
 
 
 class Actors(models.Model):
-    actorid = models.AutoField(primary_key=True, default=1)
+    actorid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=300)
     gender = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.actorid
+        return self.name
 
 
 class Directors(models.Model):
-    directorid = models.AutoField(primary_key=True, default=1)
+    directorid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=300)
     gender = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.directorid
+        return self.name

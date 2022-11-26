@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from movie_app import views
-from django.contrib.auth import views as auth_views
-from django.views.generic.base import TemplateView
+
 
 urlpatterns = [
-    path('home', views.home, name='home'),
+    path('index', views.index, name='index'),
+    path('login', views.login, name='login'),
     path('', views.first, name='first'),
+    path('insert_movies', views.insert_movies, name='insert_movies'),
+    path('delete_movies', views.delete_movies, name='delete_movies'),
 ]
